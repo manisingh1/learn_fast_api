@@ -84,7 +84,7 @@ def test_get_artist_and_album():
     assert data[0]["name"] == "ep 1"
 
 
-def test_get_artist_and_album_with_filter():
+def test_get_artist_and_album_with_filters():
     response = client.post(
         "/artists/",
         json={"name": "test-artist"},
@@ -119,7 +119,7 @@ def test_get_artist_and_album_with_filter():
     assert len(data) == 0
 
 
-def test_make_album_no_artist():
+def test_make_album_no_artist_returns_404():
     response = client.post(
         "/albums/",
         json={
@@ -129,5 +129,4 @@ def test_make_album_no_artist():
             "artist_name": "test-artist",
         },
     )
-
     assert response.status_code == 404
