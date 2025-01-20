@@ -1,6 +1,6 @@
 from sqlalchemy import Boolean, Column, Integer, String, Date, Float, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase, relationship
-from database import Base
+from app.database import Base
 from typing import List
 
 
@@ -18,8 +18,7 @@ class Album(Base):
     name = Column(String(50))
     release_date = Column(Date)
     price = Column(Float)
-    # id fields
-    # id = Column(Integer, primary_key=True, index=True)
+    artist_name = Column(String(50))
     id: Mapped[int] = mapped_column(primary_key=True)
     artist_id: Mapped[int] = mapped_column(ForeignKey("artist_table.id"))
     artist: Mapped["Artist"] = relationship(back_populates="albums")
